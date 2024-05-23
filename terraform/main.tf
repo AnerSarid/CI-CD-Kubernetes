@@ -4,7 +4,7 @@ provider "aws" {
 
 module "vpc" {
   source = "./modules/vpc"
-  cidr_block = var.vpc_cidr_block
+  vpc_cidr_block = var.vpc_cidr_block
 }
 
 module "eks" {
@@ -12,7 +12,7 @@ module "eks" {
   vpc_id          = module.vpc.vpc_id
   subnet_ids      = module.vpc.private_subnets
   cluster_name    = var.cluster_name
-  node_instance_type = var.node_instance_type
+  node_instance_type = ["t3.medium"]
 }
 
 module "efs" {

@@ -1,5 +1,7 @@
+data "aws_availability_zones" "available" {}
+
 resource "aws_vpc" "main" {
-  cidr_block = var.cidr_block
+  cidr_block = var.vpc_cidr_block
 
   tags = {
     Name = "project-vpc"
@@ -7,7 +9,7 @@ resource "aws_vpc" "main" {
 }
 
 resource "aws_subnet" "public" {
-  count                   = 2
+  count                   = var.public_subnet_count
   vpc_id                  = aws_vpc.main.id
   cidr_block              = cidrsubnet(aws_vpc.main.cidr_block, 8, count.index)
   availability_zone       = element(data.aws_availability_zones.available.names, count.index)
@@ -19,7 +21,7 @@ resource "aws_subnet" "public" {
 }
 
 resource "aws_subnet" "private" {
-  count             = 2
+  count             = var.private_subnet_count
   vpc_id            = aws_vpc.main.id
   cidr_block        = cidrsubnet(aws_vpc.main.cidr_block, 8, count.index + 2)
   availability_zone = element(data.aws_availability_zones.available.names, count.index)
@@ -47,7 +49,7 @@ resource "aws_nat_gateway" "main" {
 }
 
 resource "aws_eip" "main" {
-  vpc = true
+  domain = "vpc"
 }
 
 resource "aws_route_table" "public" {
