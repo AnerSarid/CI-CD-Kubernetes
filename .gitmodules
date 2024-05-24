@@ -1,0 +1,3 @@
+[submodule "freechess"]
+	path = freechess
+	url = https://github.com/AnerSarid/freechess.git
