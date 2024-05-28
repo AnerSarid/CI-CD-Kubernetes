@@ -46,3 +46,30 @@ variable "efs_tags" {
   }
 }
 
+variable "domain_name" {
+  description = "The domain name for the Route 53 hosted zone"
+  type        = string
+}
+
+# Route 53 Variables
+variable "route53_a_records" {
+  description = "A map of A DNS records to create"
+  type = map(object({
+    name    = string
+    ttl     = number
+    records = list(string)
+  }))
+  default = {}
+}
+
+variable "route53_cname_records" {
+  description = "A map of CNAME DNS records to create"
+  type = map(object({
+    name    = string
+    ttl     = number
+    records = string
+  }))
+  default = {}
+}
+
+

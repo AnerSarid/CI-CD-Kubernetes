@@ -26,6 +26,39 @@ module "efs" {
   name              = var.project_name
 }
 
+module "dns" {
+  source      = "./modules/dns"
+  domain_name = var.domain_name
+  a_records   = var.route53_a_records
+  cname_records = {
+    "frontend" = {
+      name    = "frontend.${var.domain_name}"
+      ttl     = 300
+      records = module.alb.dns_name
+    }
+    "backend" = {
+      name    = "api.${var.domain_name}"
+      ttl     = 300
+      records = module.alb.dns_name
+    }
+    "jenkins" = {
+      name    = "jenkins.${var.domain_name}"
+      ttl     = 300
+      records = module.alb.dns_name
+    }
+    "sonarqube" = {
+      name    = "sonarqube.${var.domain_name}"
+      ttl     = 300
+      records = module.alb.dns_name
+    }
+    "argocd" = {
+      name    = "argocd.${var.domain_name}"
+      ttl     = 300
+      records = module.alb.dns_name
+    }
+  }
+}
+
 module "alb" {
   source          = "./modules/alb"
   vpc_id          = module.vpc.vpc_id

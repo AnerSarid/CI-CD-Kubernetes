@@ -20,3 +20,9 @@ output "alb_dns_name" {
   value = module.alb.alb_dns_name
 }
 
+output "dns_zone_id" {
+  description = "The ID of the Route 53 hosted zone."
+  value       = module.dns.zone_id
+}
+
+
