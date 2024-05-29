@@ -10,7 +10,7 @@ metadata:
 spec:
   ingressClassName: alb
   rules:
-  - host: anersarid.dev
+  - host: api.anersarid.dev
     http:
       paths:
       - path: /

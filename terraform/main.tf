@@ -43,7 +43,7 @@ module "dns" {
     }
     "jenkins" = {
       name    = "jenkins.${var.domain_name}"
-      ttl     = 300
+      ttl     = 300      
       records = module.alb.dns_name
     }
     "sonarqube" = {
@@ -60,9 +60,11 @@ module "dns" {
 }
 
 module "alb" {
-  source          = "./modules/alb"
-  vpc_id          = module.vpc.vpc_id
-  public_subnets  = module.vpc.public_subnets
+  source           = "./modules/alb"
+  name             = var.project_name
+  public_subnets          = module.vpc.public_subnets
+  vpc_id           = module.vpc.vpc_id
+  eks_nodegroup_name = module.eks.node_group_name
 }
 
 module "cloudwatch" {

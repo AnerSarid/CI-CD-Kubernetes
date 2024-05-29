@@ -14,3 +14,10 @@ variable "private_subnet_count" {
   type        = number
   default     = 2
 }
+
+variable "cluster_name" {
+  description = "EKS cluster name"
+  type        = string
+  default     = "develop-eks-project"
+}
+

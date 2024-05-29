@@ -1,0 +1,13 @@
+eksctl utils associate-iam-oidc-provider --region eu-central-1 --cluster develop-eks-project --approve
+
+eksctl create iamserviceaccount \
+  --cluster=develop-eks-project \
+  --namespace=kube-system \
+  --name=aws-load-balancer-controller \
+  --attach-policy-arn=arn:aws:iam::553667535636:policy/AWSLoadBalancerControllerIAMPolicy \
+  --approve
+
+
+helm install aws-load-balancer-controller eks/aws-load-balancer-controller -n kube-system --set clusterName=develop-eks-project --set serviceAccount.create=false --set region=eu-central-1 --set vpcId=vpc-051bbfbf751f0c704 --set serviceAccount.name=aws-load-balancer-controller
+
+kubectl get pods -n kube-system

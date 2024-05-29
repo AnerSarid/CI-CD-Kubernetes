@@ -19,26 +19,26 @@ route53_cname_records = {
   "frontend" = {
     name    = "frontend.anersarid.dev"
     ttl     = 300
-    records = "main-alb-37309640.eu-central-1.elb.amazonaws.com"
+    records = ""
   }
   "backend" = {
     name    = "api.anersarid.dev"
     ttl     = 300
-    records = "main-alb-37309640.eu-central-1.elb.amazonaws.com"
+    records = ""
   }
   "jenkins" = {
     name    = "jenkins.anersarid.dev"
     ttl     = 300
-    records = "main-alb-37309640.eu-central-1.elb.amazonaws.com"
+    records = ""
   }
   "sonarqube" = {
     name    = "sonarqube.anersarid.dev"
     ttl     = 300
-    records = "main-alb-37309640.eu-central-1.elb.amazonaws.com"
+    records = ""
   }
   "argocd" = {
     name    = "argocd.anersarid.dev"
     ttl     = 300
-    records = "main-alb-37309640.eu-central-1.elb.amazonaws.com"
+    records = ""
   }
 }
